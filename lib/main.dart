@@ -102,8 +102,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             if (_counter > 0)
               Positioned(
-                left: 70,
-                bottom: 40,
+                left: 40,
+                bottom: 10,
                 child: FloatingActionButton(
                   onPressed: _decrementCounter,
                   tooltip: 'Decrement',
@@ -111,8 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             Positioned(
-              right: 40,
-              bottom: 40,
+              right: 10,
+              bottom: 10,
               child: FloatingActionButton(
                 onPressed: _incrementCounter,
                 tooltip: 'Increment',
