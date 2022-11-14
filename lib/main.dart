@@ -1,3 +1,4 @@
+import 'package:counter_7/dataBudgetPage.dart';
 import 'package:counter_7/tambahBudget.dart';
 import 'package:flutter/material.dart';
 
@@ -113,13 +114,14 @@ class _MyHomePageState extends State<MyHomePage> {
               // ignore: prefer_const_constructors
               ListTile(
                 title: const Text('Daftar Budget'),
-                // onTap: () {
-                //   // Route menu ke halaman form
-                //   Navigator.pushReplacement(
-                //     context,
-                //     MaterialPageRoute(builder: (context) => const MyFormPage()),
-                //   );
-                // },
+                onTap: () {
+                  // Route menu ke halaman form
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const DataBudgetPage()),
+                  );
+                },
               ),
             ],
           ),

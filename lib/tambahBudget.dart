@@ -1,5 +1,5 @@
-import 'dart:ffi';
-
+import 'package:counter_7/dataBudgetPage.dart';
+import 'package:counter_7/models/budget.dart';
 import 'package:flutter/material.dart';
 import 'package:counter_7/main.dart';
 import 'package:flutter/services.dart';
@@ -20,11 +20,9 @@ class _TambahBudgetPage extends State<TambahBudgetPage> {
   // ignore: unused_field
   String _nominal = "";
 
-  String jenis = 'Pemasukan';
+  String _jenis = 'Pemasukan';
 
   List<String> listJenis = ['Pemasukan', 'Pengeluaran'];
-
-  List<List<String>> data = [];
 
   @override
   Widget build(BuildContext context) {
@@ -66,13 +64,14 @@ class _TambahBudgetPage extends State<TambahBudgetPage> {
             // ignore: prefer_const_constructors
             ListTile(
               title: const Text('Daftar Budget'),
-              // onTap: () {
-              //   // Route menu ke halaman form
-              //   Navigator.pushReplacement(
-              //     context,
-              //     MaterialPageRoute(builder: (context) => const MyFormPage()),
-              //   );
-              // },
+              onTap: () {
+                // Route menu ke halaman form
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DataBudgetPage()),
+                );
+              },
             ),
           ],
         ),
@@ -160,7 +159,7 @@ class _TambahBudgetPage extends State<TambahBudgetPage> {
                     'Pilih Jenis',
                   ),
                   trailing: DropdownButton(
-                    value: jenis,
+                    value: _jenis,
                     icon: const Icon(Icons.keyboard_arrow_down),
                     items: listJenis.map((String items) {
                       return DropdownMenuItem(
@@ -170,7 +169,7 @@ class _TambahBudgetPage extends State<TambahBudgetPage> {
                     }).toList(),
                     onChanged: (String? newValue) {
                       setState(() {
-                        jenis = newValue!;
+                        _jenis = newValue!;
                       });
                     },
                   ),
@@ -181,7 +180,8 @@ class _TambahBudgetPage extends State<TambahBudgetPage> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // data.add([_judul, _nominal]);
+                      Budget.data.add(Budget(
+                          judul: _judul, nominal: _nominal, tipe: _jenis));
                       showDialog(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
