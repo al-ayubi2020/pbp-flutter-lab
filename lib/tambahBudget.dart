@@ -1,16 +1,74 @@
+// ignore_for_file: file_names
+
 import 'package:counter_7/models/budget.dart';
+import 'package:counter_7/models/datePicker.dart';
 import 'package:counter_7/models/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TambahBudgetPage extends StatefulWidget {
-  const TambahBudgetPage({super.key});
+  const TambahBudgetPage({super.key, this.restorationId});
+
+  final String? restorationId;
 
   @override
   State<TambahBudgetPage> createState() => _TambahBudgetPage();
 }
 
-class _TambahBudgetPage extends State<TambahBudgetPage> {
+class _TambahBudgetPage extends State<TambahBudgetPage> with RestorationMixin {
+  @override
+  String? get restorationId => widget.restorationId;
+
+  final RestorableDateTime _selectedDate =
+      RestorableDateTime(DateTime(2021, 7, 25));
+  late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture =
+      RestorableRouteFuture<DateTime?>(
+    onComplete: _selectDate,
+    onPresent: (NavigatorState navigator, Object? arguments) {
+      return navigator.restorablePush(
+        _datePickerRoute,
+        arguments: _selectedDate.value.millisecondsSinceEpoch,
+      );
+    },
+  );
+
+  static Route<DateTime> _datePickerRoute(
+    BuildContext context,
+    Object? arguments,
+  ) {
+    return DialogRoute<DateTime>(
+      context: context,
+      builder: (BuildContext context) {
+        return DatePickerDialog(
+          restorationId: 'date_picker_dialog',
+          initialEntryMode: DatePickerEntryMode.calendarOnly,
+          initialDate: DateTime.fromMillisecondsSinceEpoch(arguments! as int),
+          firstDate: DateTime(2021),
+          lastDate: DateTime(2022),
+        );
+      },
+    );
+  }
+
+  @override
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+    registerForRestoration(_selectedDate, 'selected_date');
+    registerForRestoration(
+        _restorableDatePickerRouteFuture, 'date_picker_route_future');
+  }
+
+  void _selectDate(DateTime? newSelectedDate) {
+    if (newSelectedDate != null) {
+      setState(() {
+        _selectedDate.value = newSelectedDate;
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+              'Selected: ${_selectedDate.value.day}/${_selectedDate.value.month}/${_selectedDate.value.year}'),
+        ));
+      });
+    }
+  }
+
   final _formKey = GlobalKey<FormState>();
 
   bool isNumeric(String value) {
@@ -138,6 +196,21 @@ class _TambahBudgetPage extends State<TambahBudgetPage> {
                     },
                   ),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    OutlinedButton(
+                      onPressed: () {
+                        _restorableDatePickerRouteFuture.present();
+                      },
+                      child: const Text('Open Date Picker'),
+                    ),
+                    Text(
+                      '${_selectedDate.value.day}/${_selectedDate.value.month}/${_selectedDate.value.year}',
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
                 TextButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.blue),
@@ -145,22 +218,16 @@ class _TambahBudgetPage extends State<TambahBudgetPage> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       Budget.data.add(Budget(
-                          judul: _judul, nominal: _nominal, tipe: _jenis));
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                                title: const Text('Info'),
-                                content: const Text('Berhasil tambah'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(context, 'OK'),
-                                    child: const Text('OK'),
-                                  ),
-                                ],
-                              ));
+                          judul: _judul,
+                          nominal: _nominal,
+                          tipe: _jenis,
+                          tanggal:
+                              '${_selectedDate.value.day}/${_selectedDate.value.month}/${_selectedDate.value.year}'));
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Berhasil Tambah'),
+                      ));
                     }
-                    _formKey.currentState?.reset();
+                    // _formKey.currentState?.reset();
                   },
                   child: const Text(
                     "Simpan",

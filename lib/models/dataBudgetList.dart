@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:counter_7/models/budget.dart';
 
@@ -31,18 +33,22 @@ class DataBudgetList extends StatelessWidget {
                     children: [
                       Text(
                         budgets[index].judul,
-                        style: TextStyle(fontSize: 24),
+                        style: const TextStyle(fontSize: 24),
+                      ),
+                      Text(
+                        budgets[index].tanggal,
+                        style: const TextStyle(fontSize: 14),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             budgets[index].nominal.toString(),
-                            style: TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 18),
                           ),
                           Text(
                             budgets[index].tipe,
-                            style: TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 18),
                           ),
                         ],
                       )
