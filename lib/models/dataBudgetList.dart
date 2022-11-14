@@ -24,28 +24,31 @@ class DataBudgetList extends StatelessWidget {
               itemBuilder: (context, index) {
                 //DIDALAM BUILDER INI WIDGET AKAN DILOOPING BERDASARKAN JUMLAH DATA, DAN INDEX ARRAYNYA AKAN DIUPDATE KE DALAM VARIABLE INDEX
                 return Card(
-                  child: Row(
-                    children: <Widget>[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            budgets[index].judul,
-                            style: TextStyle(fontSize: 24),
-                          ),
+                    child: Container(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        budgets[index].judul,
+                        style: TextStyle(fontSize: 24),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
                           Text(
                             budgets[index].nominal,
-                            style: TextStyle(fontSize: 24),
+                            style: TextStyle(fontSize: 18),
                           ),
                           Text(
                             budgets[index].tipe,
-                            style: TextStyle(fontSize: 24),
+                            style: TextStyle(fontSize: 18),
                           ),
                         ],
                       )
                     ],
                   ),
-                );
+                ));
               },
               itemCount: budgets
                   .length, //JUMLAH ITEMNYA BERDASARKAN JUMLAH DATA YANG ADA DI DALAM CARTS

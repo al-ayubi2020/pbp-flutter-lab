@@ -51,7 +51,7 @@ class _TambahBudgetPage extends State<TambahBudgetPage> {
             ),
             // ignore: prefer_const_constructors
             ListTile(
-              title: const Text('Tambah Budget'),
+              title: const Text('Form Budget'),
               onTap: () {
                 // Route menu ke halaman form
                 Navigator.pushReplacement(
