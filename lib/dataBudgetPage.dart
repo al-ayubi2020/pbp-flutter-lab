@@ -1,9 +1,7 @@
 import 'package:counter_7/models/budget.dart';
 import 'package:counter_7/models/dataBudgetList.dart';
-import 'package:counter_7/tambahBudget.dart';
+import 'package:counter_7/models/drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:counter_7/main.dart';
-import 'package:flutter/services.dart';
 
 class DataBudgetPage extends StatefulWidget {
   const DataBudgetPage({super.key});
@@ -22,52 +20,7 @@ class _DataBudgetPage extends State<DataBudgetPage> {
       appBar: AppBar(
         title: const Text('Form'),
       ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            // Menambahkan clickable menu
-            const Padding(
-              padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
-            ),
-            ListTile(
-              title: const Text('Counter'),
-              onTap: () {
-                // Route menu ke halaman utama
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          const MyHomePage(title: 'Flutter Demo Home Page')),
-                );
-              },
-            ),
-            // ignore: prefer_const_constructors
-            ListTile(
-              title: const Text('Data Budget'),
-              onTap: () {
-                // Route menu ke halaman form
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const TambahBudgetPage()),
-                );
-              },
-            ),
-            // ignore: prefer_const_constructors
-            ListTile(
-              title: const Text('Daftar Budget'),
-              onTap: () {
-                // Route menu ke halaman form
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DataBudgetPage()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: const DrawerCustom(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
