@@ -11,8 +11,6 @@ class DataBudgetPage extends StatefulWidget {
 }
 
 class _DataBudgetPage extends State<DataBudgetPage> {
-  final _formKey = GlobalKey<FormState>();
-
   // ignore: unused_field
   @override
   Widget build(BuildContext context) {

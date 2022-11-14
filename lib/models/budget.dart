@@ -1,6 +1,6 @@
 class Budget {
   final String judul;
-  final String nominal;
+  final int nominal;
   final String tipe;
   static List<Budget> data = [];
 

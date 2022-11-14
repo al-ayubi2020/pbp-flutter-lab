@@ -13,11 +13,15 @@ class TambahBudgetPage extends StatefulWidget {
 class _TambahBudgetPage extends State<TambahBudgetPage> {
   final _formKey = GlobalKey<FormState>();
 
+  bool isNumeric(String value) {
+    return int.tryParse(value) != null;
+  }
+
   // ignore: unused_field
   String _judul = "";
 
   // ignore: unused_field
-  String _nominal = "";
+  int _nominal = 0;
 
   String _jenis = 'Pemasukan';
 
@@ -90,19 +94,25 @@ class _TambahBudgetPage extends State<TambahBudgetPage> {
                     // Menambahkan behavior saat nama diketik
                     onChanged: (String? value) {
                       setState(() {
-                        _nominal = value!;
+                        _nominal = int.parse(value!);
                       });
                     },
                     // Menambahkan behavior saat data disimpan
                     onSaved: (String? value) {
                       setState(() {
-                        _nominal = value!;
+                        _nominal = value! as int;
                       });
                     },
                     // Validator sebagai validasi form
                     validator: (String? value) {
+                      // Saat kosong
                       if (value == null || value.isEmpty) {
-                        return 'Nominal tidak boleh kosong!';
+                        return 'Nominal budget tidak boleh kosong! Harap diisi.';
+                      }
+
+                      // Saat bukan angka
+                      if (!isNumeric(value)) {
+                        return 'Nominal budget yang diisi harus berupa angka! Harap diisi ulang';
                       }
                       return null;
                     },

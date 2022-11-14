@@ -37,7 +37,7 @@ class DataBudgetList extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            budgets[index].nominal,
+                            budgets[index].nominal.toString(),
                             style: TextStyle(fontSize: 18),
                           ),
                           Text(
