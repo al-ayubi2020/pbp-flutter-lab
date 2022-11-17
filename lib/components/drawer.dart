@@ -19,7 +19,7 @@ class DrawerCustom extends StatelessWidget {
             title: const Text('Counter'),
             onTap: () {
               // Route menu ke halaman utama
-              Navigator.pushReplacement(
+              Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
@@ -32,7 +32,7 @@ class DrawerCustom extends StatelessWidget {
             title: const Text('Tambah Budget'),
             onTap: () {
               // Route menu ke halaman form
-              Navigator.pushReplacement(
+              Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => const TambahBudgetPage()),
@@ -44,7 +44,7 @@ class DrawerCustom extends StatelessWidget {
             title: const Text('Daftar Budget'),
             onTap: () {
               // Route menu ke halaman form
-              Navigator.pushReplacement(
+              Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const DataBudgetPage()),
               );
