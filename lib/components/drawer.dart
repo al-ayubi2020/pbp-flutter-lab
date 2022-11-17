@@ -1,6 +1,6 @@
-import 'package:counter_7/dataBudgetPage.dart';
+import 'package:counter_7/pages/dataBudgetPage.dart';
 import 'package:counter_7/main.dart';
-import 'package:counter_7/tambahBudget.dart';
+import 'package:counter_7/pages/tambahBudget.dart';
 import 'package:flutter/material.dart';
 
 class DrawerCustom extends StatelessWidget {
