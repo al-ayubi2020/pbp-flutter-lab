@@ -1,5 +1,6 @@
 import 'package:counter_7/pages/dataBudgetPage.dart';
 import 'package:counter_7/main.dart';
+import 'package:counter_7/pages/my_watch_list.dart';
 import 'package:counter_7/pages/tambahBudget.dart';
 import 'package:flutter/material.dart';
 
@@ -11,15 +12,13 @@ class DrawerCustom extends StatelessWidget {
     return Drawer(
       child: Column(
         children: [
-          // Menambahkan clickable menu
           const Padding(
             padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
           ),
           ListTile(
             title: const Text('Counter'),
             onTap: () {
-              // Route menu ke halaman utama
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
@@ -27,26 +26,31 @@ class DrawerCustom extends StatelessWidget {
               );
             },
           ),
-          // ignore: prefer_const_constructors
           ListTile(
             title: const Text('Tambah Budget'),
             onTap: () {
-              // Route menu ke halaman form
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                     builder: (context) => const TambahBudgetPage()),
               );
             },
           ),
-          // ignore: prefer_const_constructors
           ListTile(
             title: const Text('Daftar Budget'),
             onTap: () {
-              // Route menu ke halaman form
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const DataBudgetPage()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('My Watch List'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const MyWatchList()),
               );
             },
           ),
