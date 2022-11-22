@@ -68,3 +68,31 @@ Dalam melakukan routing, menggunakan Navigator.push() maupun Navigator.pushRepla
 Form dibuat mengikuti tutorial sebelumnya, yaitu gunakan widget form dan buat dua textfield, dropdownButton, Datepicker dan tombol submit.
 Ketika disubmit, objek budget akan dipush kedalam properti static yang ada pada object tersebut.
 Untuk menampilkan list dari budget, list dari properti static budget akan di-loop menggunakan `ListView.builder` dan akan masukan kedalam page.
+
+# assignment 9
+
+## Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?
+
+Ya, bisa. Bisa saja melakukan pengambilan data JSON dan di simpan pada suaru variable tanpa melakukan mapping pada model. Sehingga data tersebut tidak akan didecode dan tidak akan dilakukan render. Seharusnya lebih baik dibuat dulu modelnya sehingga dapat ditampung dalam sebuah list yang bertipe class model tersebut.
+
+## Sebutkan widget apa saja yang kamu pakai di proyek kali ini dan jelaskan fungsinya.
+
+1. Widget utama adalah FutureBuilder. Widget yang dibuat sendiri berdasarkan snapshot interaksi terbaru dengan Future.
+2. ListView, Widget untuk me-generate widget-widget lain dengan method builder().
+3. GestureDetector, untuk mendeteksi event yang terjadi pada sebuah widget.
+4. Checkbox, sebagai input value bertipe true atau false.
+
+## mekanisme pengambilan data dari json hingga dapat ditampilkan pada Flutter.
+
+- Pertama, buat sebuah model untuk menampung data data tersebut kedalam sebuah satu objek dan dapat ditampung kedalam debuah list bertipe objek tersebut.
+- Untuk melakukan perintah HTTP request, kita membutuhkan package tambahan yakni package http.
+- Pada file `android/app/src/main/AndroidManifest.xml`, tambahkan kode untuk memperbolehkan akses Internet pada aplikasi Flutter yang sedang dibuat.
+- Buat sebuah `Future<List<Object>>` untuk di hubungkan kedalam FutureBuilder. Isinya adalah sebuah http.get dengan sebuah endpoin lalu menunggu http tersebut selesai dan maskukan kedalam object dan masukan kedalam list.
+- setelah itu list tersebut dapan di passing kedalam sebuah page dan dilakukan listview.builder untuk merender setiap widget.
+
+## cara mengimplementasikan checklist di atas.
+
+1. Buat sebuah model untuk menampung data bernama watchListItem.
+2. Buat sebuah page untuk me-render card dari setiap anggota list yang ada.
+3. Terapkan dinamic routing kepada setiap object atau card.
+4. Sesuaikan segala fungsi widget.
