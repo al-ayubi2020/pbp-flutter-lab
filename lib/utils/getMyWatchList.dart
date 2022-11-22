@@ -52,4 +52,20 @@ class GetMyWatchList {
     }
     return watchList;
   }
+
+  updateStatus(pk) async {
+    var url = Uri.parse(
+        'https://web-production-8ac6.up.railway.app/mywatchlist/json/update/$pk');
+    var response = await http.get(
+      url,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    );
+
+    // melakukan decode response menjadi bentuk json
+
+    // melakukan konversi data json menjadi object ToDo
+  }
 }

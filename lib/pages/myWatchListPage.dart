@@ -2,7 +2,7 @@
 
 import 'package:counter_7/components/drawer.dart';
 import 'package:counter_7/utils/getMyWatchList.dart';
-import 'package:counter_7/pages/watchListDetailPage.dart';
+import 'package:counter_7/pages/mywatchListDetailPage.dart';
 import 'package:flutter/material.dart';
 
 class MyWatchList extends StatefulWidget {
@@ -14,6 +14,18 @@ class MyWatchList extends StatefulWidget {
 
 class _MyWatchList extends State<MyWatchList> {
   GetMyWatchList getMyWatchList = GetMyWatchList();
+
+  Color getColor(Set<MaterialState> states) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.pressed,
+      MaterialState.hovered,
+      MaterialState.focused,
+    };
+    if (states.any(interactiveStates.contains)) {
+      return Colors.blue;
+    }
+    return Colors.blue;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +70,13 @@ class _MyWatchList extends State<MyWatchList> {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(15.0),
+                                border: Border.all(
+                                  color: snapshot.data![index].fields.watched ==
+                                          true
+                                      ? Colors.green
+                                      : Colors.red,
+                                  width: 2,
+                                ),
                                 boxShadow: const [
                                   BoxShadow(
                                       color: Colors.black, blurRadius: 2.0)
@@ -66,12 +85,32 @@ class _MyWatchList extends State<MyWatchList> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "${snapshot.data![index].fields.title}",
-                                  style: const TextStyle(
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                Row(
+                                  children: [
+                                    Checkbox(
+                                      checkColor: Colors.white,
+                                      fillColor:
+                                          MaterialStateProperty.resolveWith(
+                                              getColor),
+                                      value: snapshot
+                                              .data![index].fields.watched ==
+                                          true,
+                                      onChanged: (bool? value) {
+                                        getMyWatchList.updateStatus(
+                                            snapshot.data![index].pk);
+                                        setState(() {});
+                                      },
+                                    ),
+                                    Flexible(
+                                      child: Text(
+                                        "${snapshot.data![index].fields.title}",
+                                        style: const TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
