@@ -97,7 +97,7 @@ class _MyWatchList extends State<MyWatchList> {
                                           true,
                                       onChanged: (bool? value) {
                                         getMyWatchList.updateStatus(
-                                            snapshot.data![index].pk);
+                                            snapshot.data![index].pk, context);
                                         setState(() {});
                                       },
                                     ),

@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:counter_7/models/watchListItem.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -53,7 +54,7 @@ class GetMyWatchList {
     return watchList;
   }
 
-  updateStatus(pk) async {
+  updateStatus(pk, context) async {
     var url = Uri.parse(
         'https://web-production-8ac6.up.railway.app/mywatchlist/json/update/$pk');
     var response = await http.get(
@@ -62,7 +63,11 @@ class GetMyWatchList {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
-    );
+    ).then((value) => {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('Berhasil diubah'),
+          ))
+        });
 
     // melakukan decode response menjadi bentuk json
 
